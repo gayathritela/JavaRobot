@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Robot.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">org.phasetwo.mavenproject</a> &gt; <a href="index.source.html" class="el_package">org.phasetwo.mavenproject.org.phasetwo.mavenproject</a> &gt; <span class="el_source">Robot.java</span></div><h1>Robot.java</h1><pre class="source lang-java linenums">package org.phasetwo.mavenproject.org.phasetwo.mavenproject;
+
+import java.util.Scanner;
+
+<span class="fc" id="L5">public class Robot {</span>
+	
+	    static int[][] board;
+	    static int dimension;
+	    static int Xaxis;
+	    static int Yaxis;
+	    static boolean PenDown;
+	    static String Direction;
+
+	    public static void main(String[] args) {
+<span class="nc" id="L15">	        Scanner scanner = new Scanner(System.in);</span>
+	        String command;
+
+<span class="nc" id="L18">	        System.out.print(&quot;Enter the command: &quot;);</span>
+<span class="nc bnc" id="L19" title="All 2 branches missed.">	        while (!(command = scanner.nextLine()).equalsIgnoreCase(&quot;Q&quot;)) {</span>
+	            //executeCommand(command);
+<span class="nc" id="L21">	            System.out.print(&quot;Enter the command: &quot;);</span>
+	        }
+<span class="nc" id="L23">	    }</span>
+
+	    
+
+	    public static void initialize_System(int n) {
+<span class="fc" id="L28">	        dimension = n;</span>
+<span class="fc" id="L29">	        board = new int[dimension][dimension];</span>
+<span class="fc" id="L30">	        Xaxis = 0;</span>
+<span class="fc" id="L31">	        Yaxis = 0;</span>
+<span class="fc" id="L32">	        PenDown = false;</span>
+<span class="fc" id="L33">	        Direction = &quot;north&quot;;</span>
+<span class="fc" id="L34">	    }</span>
+
+	    public static String print_CurrentPosition() {
+<span class="fc" id="L37">	    	String output = String.format(&quot;Position: %d, %d - Pen: %s - Facing: %s%n&quot;,</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">	                Xaxis, Yaxis, (PenDown ? &quot;down&quot; : &quot;up&quot;), Direction);</span>
+<span class="fc" id="L39">	    	System.out.println(output);</span>
+<span class="fc" id="L40">	        return output;</span>
+	    }
+
+	    public static void setPenDown(boolean down) {
+<span class="fc" id="L44">	        PenDown = down;</span>
+<span class="fc" id="L45">	    }</span>
+
+	    public static void turn_Right() {
+<span class="fc bfc" id="L48" title="All 2 branches covered.">	       if (Direction == &quot;north&quot;){ Direction = &quot;east&quot;; }</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">	       else if (Direction == &quot;east&quot;) { Direction = &quot;south&quot;; }</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">	       else if (Direction == &quot;south&quot;) { Direction = &quot;west&quot;; }</span>
+<span class="fc" id="L51">	       else  { Direction = &quot;north&quot;; }</span>
+<span class="fc" id="L52">	    }</span>
+	    
+	    public static void turn_Left() {
+<span class="fc bfc" id="L55" title="All 2 branches covered.">	    	 if (Direction == &quot;north&quot;){ Direction = &quot;west&quot;; }</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">	         else if (Direction == &quot;east&quot;) { Direction = &quot;north&quot;; }</span>
+<span class="fc bfc" id="L57" title="All 2 branches covered.">	         else if (Direction == &quot;south&quot;) { Direction = &quot;east&quot;; }</span>
+<span class="fc" id="L58">	         else  { Direction = &quot;south&quot;; }</span>
+<span class="fc" id="L59">	    }</span>
+
+	    public static void move(int steps) {
+<span class="fc bfc" id="L62" title="All 2 branches covered.">	    	 if (Direction == &quot;north&quot;){</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">	                for (int i = 0; i &lt; steps; i++) {</span>
+<span class="fc" id="L64">	                    Yaxis = Math.min(Yaxis + 1, dimension - 1);</span>
+<span class="pc bpc" id="L65" title="1 of 2 branches missed.">	                    if (PenDown) {</span>
+<span class="fc" id="L66">	                        board[Yaxis][Xaxis] = 1;</span>
+	                    }
+	                }
+	    	 }
+<span class="fc bfc" id="L70" title="All 2 branches covered.">	    	 else if (Direction == &quot;east&quot;){</span>
+<span class="fc bfc" id="L71" title="All 2 branches covered.">	                for (int i = 0; i &lt; steps; i++) {</span>
+<span class="fc" id="L72">	                    Xaxis = Math.min(Xaxis + 1, dimension - 1);</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">	                    if (PenDown) {</span>
+<span class="fc" id="L74">	                        board[Yaxis][Xaxis] = 1;</span>
+	                    }
+	                }
+	    	 }
+<span class="fc bfc" id="L78" title="All 2 branches covered.">	    	 else if (Direction == &quot;south&quot;) {</span>
+<span class="fc bfc" id="L79" title="All 2 branches covered.">	                for (int i = 0; i &lt; steps; i++) {</span>
+<span class="fc" id="L80">	                    Yaxis = Math.max(Yaxis - 1, 0);</span>
+<span class="pc bpc" id="L81" title="1 of 2 branches missed.">	                    if (PenDown) {</span>
+<span class="fc" id="L82">	                        board[Yaxis][Xaxis] = 1;</span>
+	                    }
+	                }
+	    	 }
+	    	 else {
+<span class="fc bfc" id="L87" title="All 2 branches covered.">	                for (int i = 0; i &lt; steps; i++) {</span>
+<span class="fc" id="L88">	                    Xaxis = Math.max(Xaxis - 1, 0);</span>
+<span class="pc bpc" id="L89" title="1 of 2 branches missed.">	                    if (PenDown) {</span>
+<span class="fc" id="L90">	                        board[Yaxis][Xaxis] = 1;</span>
+	                    }
+	                }
+	    	 }
+<span class="fc" id="L94">	     }</span>
+	    
+
+	    public static String print_board() {
+<span class="fc" id="L98">	        StringBuilder output = new StringBuilder();</span>
+<span class="fc bfc" id="L99" title="All 2 branches covered.">	        for (int i = dimension - 1; i &gt;= 0; i--) {</span>
+<span class="fc" id="L100">	            output.append(String.format(&quot;%2d &quot;, i));</span>
+<span class="fc bfc" id="L101" title="All 2 branches covered.">	            for (int j = 0; j &lt; dimension; j++) {</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">	                if (board[i][j] == 1) {</span>
+<span class="fc" id="L103">	                    output.append(&quot;* &quot;);</span>
+	                } else {
+<span class="fc" id="L105">	                    output.append(&quot;  &quot;);</span>
+	                }
+	            }
+<span class="fc" id="L108">	            output.append(&quot;\n&quot;);</span>
+	        }
+<span class="fc" id="L110">	        output.append(&quot;   &quot;);</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">	        for (int i = 0; i &lt; dimension; i++) {</span>
+<span class="fc" id="L112">	            output.append(String.format(&quot;%2d&quot;, i));</span>
+	        }
+<span class="fc" id="L114">	        output.append(&quot;\n&quot;);</span>
+<span class="fc" id="L115">	        System.out.print(output);</span>
+	        
+<span class="fc" id="L117">	        return output.toString();</span>
+	    }
+
+
+		
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
